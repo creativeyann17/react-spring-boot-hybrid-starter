@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import merge from 'lodash/merge';
 
 // redux + saga
 import { Provider } from 'react-redux';
@@ -14,9 +15,13 @@ import App from './app';
 import './index.css';
 
 const sagaMiddleware = createSagaMiddleware();
+const middlewares = [sagaMiddleware];
+if (process.env.NODE_ENV === 'development') {
+  merge(middlewares, logger)
+}
 const store = createStore(
   rootReducer,
-  applyMiddleware(sagaMiddleware, logger),
+  applyMiddleware(...middlewares),
 );
 sagaMiddleware.run(rootSaga);
 
