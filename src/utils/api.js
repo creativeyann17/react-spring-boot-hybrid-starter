@@ -1,3 +1,6 @@
+import {API_BASE_URL} from '../utils/constants';
+var urljoin = require('url-join');
+
 function handleErrors(response) {
   if (!response.ok) {
       throw Error(response.statusText);
@@ -6,7 +9,7 @@ function handleErrors(response) {
 }
 
 export const get = (url, params = '') => {
-    return fetch(url, {
+    return fetch(urljoin(API_BASE_URL, url), {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
