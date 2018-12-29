@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import DefaultLayout from '../../layouts/defaultLayout';
 // selectors
-import { getVersionState } from '../../services/apiService/selector'
+import { getVersionState } from '../../services/apiService/selectors'
 
 const messages = defineMessages({
   welcome: {

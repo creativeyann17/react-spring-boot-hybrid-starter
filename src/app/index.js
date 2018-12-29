@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import locale_en from 'react-intl/locale-data/en';
 import locale_fr from 'react-intl/locale-data/fr';
-import i18n_en from './i18n/en.json';
-import i18n_fr from './i18n/fr.json';
+import i18n_en from '../i18n/en.json';
+import i18n_fr from '../i18n/fr.json';
 // router
 import { BrowserRouter, Route } from 'react-router-dom';
 import DefaultPage from '../pages/defaultPage';
 import { ROUTES } from '../utils/constants';
 // selectors
-import { getLangState } from '../services/intlService/selector';
+import { getLangState } from '../services/intlService/selectors';
 // actions
 import { apiServiceVersionRequest } from '../services/apiService/actions';
 
