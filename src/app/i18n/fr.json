@@ -1,0 +1,4 @@
+{
+  "page.index.welcome" : "Bienvenue !",
+  "page.index.version" : "API version: {version}"
+}
