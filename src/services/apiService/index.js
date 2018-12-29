@@ -3,7 +3,7 @@ import * as actions from './actions';
 import * as actionTypes from './actionTypes';
 import {get} from '../../utils/api';
 
-function* fetchAPIVersion() {
+export function* fetchAPIVersion() {
   try {
     const response = yield call(get, '/version');
     const json = yield response.json()
