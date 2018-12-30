@@ -1,2 +1,5 @@
 app:
   api-base-url: /api
+  public-urls:
+  - /manifest.json
+  - /favicon.ico

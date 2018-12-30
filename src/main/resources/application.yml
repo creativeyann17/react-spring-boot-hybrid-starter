@@ -3,3 +3,6 @@ spring:
    static-locations: file:build,classpath:/public,classpath:/static
 app:
   api-base-url: /api
+  public-urls:
+  - /manifest.json
+  - /favicon.ico

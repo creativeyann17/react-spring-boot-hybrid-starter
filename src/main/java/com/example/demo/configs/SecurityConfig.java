@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -31,11 +32,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		if (envConfig.isDEV()) {
 			http.cors().and().headers().frameOptions().sameOrigin().and().authorizeRequests().antMatchers("/**").permitAll().anyRequest().denyAll();
 		} else {
-			http.cors().disable().authorizeRequests()
-					.antMatchers("/", "/manifest.json", "/favicon.ico", "/static/**", Paths.get(appConfig.getApiBaseUrl(), "/**").toString()).permitAll().anyRequest()
+			http.cors().disable().authorizeRequests().antMatchers("/", "/static/**", Paths.get(appConfig.getApiBaseUrl(), "/**").toString()).permitAll().anyRequest()
 					.denyAll();
 		}
 		http.csrf().disable();
+	}
+
+	@Override
+	public void configure(final WebSecurity web) {
+		appConfig.getPublicUrls().stream().forEach(url -> web.ignoring().antMatchers(url));
 	}
 
 	@Bean

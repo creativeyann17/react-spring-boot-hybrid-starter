@@ -22,4 +22,9 @@ public class AppConfigTests {
 		assertThat(appConfig.getApiBaseUrl()).isEqualTo("/api");
 	}
 
+	@Test
+	public void publicUrls() {
+		assertThat(appConfig.getPublicUrls().size()).isEqualTo(2);
+	}
+
 }
