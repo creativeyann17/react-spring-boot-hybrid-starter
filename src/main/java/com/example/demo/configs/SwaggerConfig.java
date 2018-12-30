@@ -1,5 +1,8 @@
 package com.example.demo.configs;
 
+import java.nio.file.Paths;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -14,9 +17,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @Profile(EnvConfig.DEV)
 public class SwaggerConfig {
+
+	@Autowired
+	private AppConfig appConfig;
+
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.ant("/api/**")).build();
+				.paths(PathSelectors.ant(Paths.get(appConfig.getApiBaseUrl(), "/**").toString())).build();
 	}
 }

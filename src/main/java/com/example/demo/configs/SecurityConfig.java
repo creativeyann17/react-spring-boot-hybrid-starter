@@ -1,5 +1,6 @@
 package com.example.demo.configs;
 
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private EnvConfig envConfig;
+
+	@Autowired
+	private AppConfig appConfig;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -36,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "HEAD", "PUT", "DELETE"));
 		configuration.setAllowCredentials(true);
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/api/**", configuration);
+		source.registerCorsConfiguration(Paths.get(appConfig.getApiBaseUrl(), "/**").toString(), configuration);
 		return source;
 	}
 }

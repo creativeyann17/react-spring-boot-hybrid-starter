@@ -11,3 +11,7 @@ This custom starter contains the following:
   * one default layout and page
   * fetch API version at startup
 * spring Boot 2
+  * lombok/security/cors
+  * swagger-ui
+  * custom configuration
+  * 'dev' ready profil
