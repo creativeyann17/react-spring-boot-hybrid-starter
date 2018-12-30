@@ -15,5 +15,5 @@ This custom starter contains the following:
   * lombok/security/cors/logger
   * swagger-ui
   * custom configuration
-  * 'dev' ready profil
+  * 'dev' ready profil with H2
   * some tests

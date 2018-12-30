@@ -1,3 +1,2 @@
 app:
   api-base-url: /api
-  cors-url: http://localhost:3000"

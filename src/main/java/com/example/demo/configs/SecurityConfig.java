@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		if (envConfig.isDEV()) {
-			http.cors().and().authorizeRequests().antMatchers("/**").permitAll().anyRequest().denyAll();
+			http.cors().and().headers().frameOptions().sameOrigin().and().authorizeRequests().antMatchers("/**").permitAll().anyRequest().denyAll();
 		} else {
 			http.cors().disable().authorizeRequests()
 					.antMatchers("/", "/manifest.json", "/favicon.ico", "/static/**", Paths.get(appConfig.getApiBaseUrl(), "/**").toString()).permitAll().anyRequest()

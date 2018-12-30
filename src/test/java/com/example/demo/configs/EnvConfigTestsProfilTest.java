@@ -37,6 +37,11 @@ public class EnvConfigTestsProfilTest {
 	}
 
 	@Test
+	public void h2() {
+		this.webClient.get().uri("/h2-console.html").exchange().expectStatus().isForbidden();
+	}
+
+	@Test
 	public void cors() {
 		this.webClient.get().uri("/api/version").header(HttpHeaders.ORIGIN, appConfig.getCorsUrl()).exchange().expectStatus().isOk();
 	}

@@ -3,4 +3,3 @@ spring:
    static-locations: file:build,classpath:/public,classpath:/static
 app:
   api-base-url: /api
-  cors-url: http://localhost:3000
