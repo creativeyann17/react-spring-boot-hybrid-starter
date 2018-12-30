@@ -3,6 +3,8 @@ package com.example.demo.configs;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
@@ -16,6 +18,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	private Logger log = LoggerFactory.getLogger(SecurityConfig.class);
+
 	@Autowired
 	private EnvConfig envConfig;
 
@@ -27,20 +31,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		if (envConfig.isDEV()) {
 			http.cors().and().authorizeRequests().antMatchers("/**").permitAll().anyRequest().denyAll();
 		} else {
-			http.cors().disable().authorizeRequests().antMatchers("/", "/manifest.json", "/favicon.ico", "/static/**", "/api/**").permitAll().anyRequest().denyAll();
+			http.cors().disable().authorizeRequests()
+					.antMatchers("/", "/manifest.json", "/favicon.ico", "/static/**", Paths.get(appConfig.getApiBaseUrl(), "/**").toString()).permitAll().anyRequest()
+					.denyAll();
 		}
 		http.csrf().disable();
 	}
-	
+
 	@Bean
 	@Profile(EnvConfig.DEV)
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+		configuration.setAllowedOrigins(Arrays.asList(appConfig.getCorsUrl()));
 		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "HEAD", "PUT", "DELETE"));
 		configuration.setAllowCredentials(true);
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration(Paths.get(appConfig.getApiBaseUrl(), "/**").toString(), configuration);
+		log.debug("CORS enabled: {}", source.getCorsConfigurations().keySet());
 		return source;
 	}
 }

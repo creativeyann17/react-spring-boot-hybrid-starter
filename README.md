@@ -10,8 +10,10 @@ This custom starter contains the following:
   * service worker
   * one default layout and page
   * fetch API version at startup
+  * some tests
 * spring Boot 2
-  * lombok/security/cors
+  * lombok/security/cors/logger
   * swagger-ui
   * custom configuration
   * 'dev' ready profil
+  * some tests

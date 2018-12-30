@@ -15,4 +15,7 @@ public class AppConfig {
 	@NotBlank
 	private String apiBaseUrl;
 
+	@NotBlank
+	private String corsUrl;
+
 }
