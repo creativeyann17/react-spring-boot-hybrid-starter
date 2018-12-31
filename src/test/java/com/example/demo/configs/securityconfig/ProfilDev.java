@@ -1,8 +1,9 @@
-package com.example.demo.configs.envconfig;
+package com.example.demo.configs.securityconfig;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.nio.file.Paths;
 
 import org.junit.Test;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.example.demo.configs.EnvConfig;
@@ -11,8 +12,9 @@ import com.example.demo.configs.EnvConfig;
 public class ProfilDev extends ProfilAll {
 
 	@Test
-	public void isDEV() {
-		assertThat(envConfig.isDEV()).isEqualTo(true);
+	public void cors() {
+		this.webClient.get().uri(Paths.get(appConfig.getApiBaseUrl(), "/version").toString()).header(HttpHeaders.ORIGIN, appConfig.getCorsUrl()).exchange()
+				.expectStatus().isOk();
 	}
 
 	@Test

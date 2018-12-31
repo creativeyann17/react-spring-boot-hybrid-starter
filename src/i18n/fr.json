@@ -1,4 +1,5 @@
 {
   "page.index.welcome" : "Bienvenue !",
-  "page.index.version" : "API version: {version}"
+  "page.index.version" : "API version: {version}",
+  "page.index.login" : "Login: {login}"
 }

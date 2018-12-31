@@ -32,4 +32,19 @@ public class AppConfig {
 	 */
 	private Set<String> publicUrls = new TreeSet<>();
 
+	private Guest guest = new Guest();
+
+	@Data
+	public static class Guest {
+		/**
+		 * Guest default user-name
+		 */
+		private String username = "GUEST";
+
+		/**
+		 * Guest default password
+		 */
+		private String password = "";
+	}
+
 }

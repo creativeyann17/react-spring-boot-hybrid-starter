@@ -2,6 +2,7 @@ import * as actionTypes from './actionTypes';
 
 const initialState = {
     version: null,
+    login: null,
 };
 
 export default function(state = initialState, action) {
@@ -20,6 +21,21 @@ export default function(state = initialState, action) {
         return {
           ...state,
           version: action.error,
+        };
+      case actionTypes.API_SERVICE_LOGIN_REQUEST:
+        return {
+          ...state,
+          login: '...',
+        };
+      case actionTypes.API_SERVICE_LOGIN_SUCCESS:
+        return {
+          ...state,
+          login: action.login.username,
+        };
+      case actionTypes.API_SERVICE_LOGIN_FAILURE:
+        return {
+          ...state,
+          login: action.error,
         };
       default:
           return state;

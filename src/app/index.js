@@ -10,11 +10,9 @@ import i18n_fr from '../i18n/fr.json';
 // router
 import { BrowserRouter, Route } from 'react-router-dom';
 import DefaultPage from '../pages/defaultPage';
-import { ROUTES } from '../utils/constants';
-// selectors
-import { getLangState } from '../services/intlService/selectors';
+import { ROUTES, API_GUEST } from '../utils/constants';
 // actions
-import { apiServiceVersionRequest } from '../services/apiService/actions';
+import { apiServiceLoginRequest } from '../services/apiService/actions';
 
 addLocaleData([...locale_en, ...locale_fr]);
 
@@ -26,7 +24,7 @@ export const messages = {
 class App extends Component {
 
   componentDidMount = () => {
-    this.props.fetchAPIVersion();
+    this.props.logAsGuest();
   }
 
   render() {
@@ -49,12 +47,12 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-      lang: getLangState(state)
+      lang: state.intlServiceReducer.lang
   };
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchAPIVersion: () => dispatch(apiServiceVersionRequest()),
+  logAsGuest: () => dispatch(apiServiceLoginRequest(API_GUEST)),
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);

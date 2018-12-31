@@ -6,3 +6,6 @@ app:
   public-urls:
   - /manifest.json
   - /favicon.ico
+  guest:
+    username: GUEST
+    password: $2a$10$5V6Rvp4GGAKu9.TpIG1usus/x07SoNxwh9zfW73KqaMg7LwQ3VcUu

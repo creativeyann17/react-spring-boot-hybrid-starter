@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "lodash": "^4.17.11",
+    "axios": "^0.18.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -14,11 +14,7 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.2",
-    "reselect": "^4.0.0",
     "url-join": "^4.0.0"
-  },
-  "devDependencies": {
-    "redux-saga-test-plan": "^3.7.0"
   },
   "scripts": {
     "start": "react-scripts start",

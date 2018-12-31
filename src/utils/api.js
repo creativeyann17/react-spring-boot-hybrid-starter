@@ -1,24 +1,37 @@
+import axios from 'axios';
+import urljoin from 'url-join';
 import {API_BASE_URL} from '../utils/constants';
-var urljoin = require('url-join');
 
-function handleErrors(response) {
-  if (!response.ok) {
+const genericFetch = (method, url, params = null, data = null) => {
+  return axios({
+    url: urljoin(API_BASE_URL, url),
+    method,
+    params,
+    data,
+  })
+  .then((response) => {
+    if (response.status !== 200) {
       throw Error(response.statusText);
-  }
-  return response;
+    }
+    return response;
+  })
+  .catch((error) => {
+      throw error;
+  });
 }
 
-export const get = (url, params = '') => {
-    return fetch(urljoin(API_BASE_URL, url), {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params,
-    })
-    .then(handleErrors)
-    .catch(function(error) {
-        throw error;
-    });
+export const post = (url, params) => {
+  return genericFetch('POST', url , params);
+};
+
+export const get= (url, params) => {
+  return genericFetch('GET', url , params);
+};
+
+export const postJSON = (url, body) => {
+  return genericFetch('POST', url , null, body);
+};
+
+export const getJSON = (url, body) => {
+  return genericFetch('GET', url , null, body);
 };

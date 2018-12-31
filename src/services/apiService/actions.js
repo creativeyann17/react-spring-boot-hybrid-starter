@@ -19,3 +19,24 @@ export const apiServiceVersionFailure = (error) => {
     error,
   }
 }
+
+export const apiServiceLoginRequest = (login) => {
+  return {
+    type: actionTypes.API_SERVICE_LOGIN_REQUEST,
+    login
+  }
+}
+
+export const apiServiceLoginSuccess = (login) => {
+  return {
+    type: actionTypes.API_SERVICE_LOGIN_SUCCESS,
+    login,
+  }
+}
+
+export const apiServiceLoginFailure = (error) => {
+  return {
+    type: actionTypes.API_SERVICE_LOGIN_FAILURE,
+    error,
+  }
+}

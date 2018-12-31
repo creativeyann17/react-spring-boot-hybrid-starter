@@ -27,4 +27,11 @@ public class AppConfigTests {
 		assertThat(appConfig.getPublicUrls().size()).isEqualTo(2);
 	}
 
+	@Test
+	public void guest() {
+		assertThat(appConfig.getGuest()).isNotNull();
+		assertThat(appConfig.getGuest().getUsername()).isNotBlank();
+		assertThat(appConfig.getGuest().getPassword()).isNotBlank();
+	}
+
 }
