@@ -19,7 +19,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.example.demo.configs.restsecurity.RestLogoutSuccessHandler;
+import com.example.demo.configs.restsecurity.RESTLogoutSuccessHandler;
 import com.example.demo.configs.restsecurity.RESTAuthenticationEntryPoint;
 import com.example.demo.configs.restsecurity.RESTAuthenticationFailureHandler;
 import com.example.demo.configs.restsecurity.RESTAuthenticationSuccessHandler;
@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private AppConfig appConfig;
 
 	@Autowired
-	private RestLogoutSuccessHandler httpLogoutSuccessHandler;
+	private RESTLogoutSuccessHandler httpLogoutSuccessHandler;
 
 	@Autowired
 	private RESTAuthenticationEntryPoint authenticationEntryPoint;

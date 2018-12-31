@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.stereotype.Component;
 
 @Component
-public class RestLogoutSuccessHandler implements LogoutSuccessHandler {
+public class RESTLogoutSuccessHandler implements LogoutSuccessHandler {
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
 		response.setStatus(HttpServletResponse.SC_OK);
