@@ -68,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			// CORS
 			http.cors().disable();
 			// URLs
-			http.authorizeRequests().antMatchers("/", "/static/**").anonymous();
+			http.authorizeRequests().antMatchers("/", "/static/**", loginUrl, logoutUrl).permitAll();
 			http.authorizeRequests().antMatchers(Paths.get(appConfig.getApiBaseUrl(), "/**").toString()).authenticated();
 			http.authorizeRequests().anyRequest().denyAll();
 			// CSRF

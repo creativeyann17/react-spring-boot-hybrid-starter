@@ -20,6 +20,25 @@ export const apiServiceVersionFailure = (error) => {
   }
 }
 
+export const apiServiceLogoutRequest = () => {
+  return {
+    type: actionTypes.API_SERVICE_LOGOUT_REQUEST,
+  }
+}
+
+export const apiServiceLogoutSuccess = (login) => {
+  return {
+    type: actionTypes.API_SERVICE_LOGOUT_SUCCESS,
+  }
+}
+
+export const apiServiceLogoutFailure = (error) => {
+  return {
+    type: actionTypes.API_SERVICE_LOGOUT_FAILURE,
+    error,
+  }
+}
+
 export const apiServiceLoginRequest = (login) => {
   return {
     type: actionTypes.API_SERVICE_LOGIN_REQUEST,
@@ -45,5 +64,12 @@ export const apiServiceCsrf = (csrf) => {
   return {
     type: actionTypes.API_SERVICE_CSRF,
     csrf,
+  }
+}
+
+export const apiServiceOnlineUsersCount = (count) => {
+  return {
+    type: actionTypes.API_SERVICE_ONLINE_USERS_COUNT,
+    count,
   }
 }

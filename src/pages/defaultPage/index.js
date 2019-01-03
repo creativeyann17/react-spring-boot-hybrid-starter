@@ -14,18 +14,22 @@ const messages = defineMessages({
   },
   login: {
     id: 'page.index.login'
+  },
+  online: {
+    id: 'page.index.online'
   }
 })
 
 const DefaultPage = (props) => {
 
-  const {intl, version, login}= props;
+  const { intl, version, login, count } = props;
 
   return (
     <DefaultLayout>
       <h1>{intl.formatMessage(messages.welcome)}</h1>
-      <p>{intl.formatMessage(messages.login, {login})}</p>
-      <p>{intl.formatMessage(messages.version, {version})}</p>
+      <p>{intl.formatMessage(messages.login, { login })}</p>
+      <p>{intl.formatMessage(messages.version, { version })}</p>
+      <p>{intl.formatMessage(messages.online, { count })}</p>
     </DefaultLayout>
   );
 }
@@ -34,17 +38,20 @@ DefaultPage.propTypes = {
   intl: intlShape.isRequired,
   version: PropTypes.string,
   login: PropTypes.string,
+  count: PropTypes.string,
 }
 
 DefaultPage.defaultProps = {
   version: 'N/A',
   login: 'N/A',
+  count: 'N/A',
 }
 
 const mapStateToProps = (state) => {
   return {
     version: apiSelectors.version(state),
     login: apiSelectors.login(state),
+    count: apiSelectors.onlineUserCount(state),
   };
 }
 

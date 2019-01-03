@@ -1,5 +1,6 @@
 {
   "page.index.welcome" : "Welcome !",
   "page.index.version" : "API version: {version}",
-  "page.index.login" : "Login: {login}"
+  "page.index.login" : "Login: {login}",
+  "page.index.online" : "Online user count: {count}"
 }
