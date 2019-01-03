@@ -21,12 +21,12 @@ export function* login(action) {
   }
 }
 
-export function* logOut() {
+export function* logout() {
   yield call(helper.post, '/logout');
 }
 
 export default function* watchAsync() {
   yield takeLatest(actionTypes.API_SERVICE_LOGIN_REQUEST, login);
   yield takeLatest(actionTypes.API_SERVICE_LOGIN_SUCCESS, fetchAPIVersion);
-  yield takeLatest([actionTypes.API_SERVICE_VERSION_SUCCESS,actionTypes.API_SERVICE_VERSION_FAILURE], logOut);
+  yield takeLatest([actionTypes.API_SERVICE_VERSION_SUCCESS,actionTypes.API_SERVICE_VERSION_FAILURE], logout);
 }

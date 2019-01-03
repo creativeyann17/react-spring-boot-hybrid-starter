@@ -22,7 +22,7 @@ const handleError = (response) => {
   return response;
 }
 
-const buildFetch = (method, url, csrf, params = undefined, data = undefined) =>{
+export const buildFetch = (method, url, csrf, params = undefined, data = undefined) =>{
   const config = {
     baseURL: API_BASE_URL,
     url,
@@ -36,11 +36,11 @@ const buildFetch = (method, url, csrf, params = undefined, data = undefined) =>{
   return config;
 }
 
-function* genericFetch(method, url, params, data){
+function* fetch(method, url, params, data){
   try{
     const csrf = yield select(apiSelectors.csrf);
     const fetchConfig = buildFetch(method, url, csrf, params, data);
-    const response = yield call(axios, fetchConfig);
+    const response = yield call(axios.request, fetchConfig);
     yield call(handleCsrfToken, response, csrf);
     return handleError(response);
   }catch(error){
@@ -49,9 +49,9 @@ function* genericFetch(method, url, params, data){
 }
 
 export const get = (url, params) => {
-  return genericFetch('GET', url, params);
+  return fetch('GET', url, params);
 };
 
 export const post = (url, params, data) => {
-  return genericFetch('POST', url, params, data);
+  return fetch('POST', url, params, data);
 };
