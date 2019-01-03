@@ -3,6 +3,7 @@ import * as actionTypes from './actionTypes';
 const initialState = {
     version: null,
     login: null,
+    csrf: null,
 };
 
 export default function(state = initialState, action) {
@@ -36,6 +37,11 @@ export default function(state = initialState, action) {
         return {
           ...state,
           login: action.error,
+        };
+      case actionTypes.API_SERVICE_CSRF:
+        return {
+          ...state,
+          csrf: action.csrf,
         };
       default:
           return state;

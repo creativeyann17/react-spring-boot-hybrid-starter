@@ -13,6 +13,8 @@ import DefaultPage from '../pages/defaultPage';
 import { ROUTES, API_GUEST } from '../utils/constants';
 // actions
 import { apiServiceLoginRequest } from '../services/apiService/actions';
+// selectors
+import * as intlSelectors from '../services/intlService/selectors';
 
 addLocaleData([...locale_en, ...locale_fr]);
 
@@ -47,7 +49,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-      lang: state.intlServiceReducer.lang
+      lang: intlSelectors.lang(state),
   };
 }
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import DefaultLayout from '../../layouts/defaultLayout';
+import * as apiSelectors from '../../services/apiService/selectors';
 
 const messages = defineMessages({
   welcome: {
@@ -42,8 +43,8 @@ DefaultPage.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-      version: state.apiServiceReducer.version,
-      login: state.apiServiceReducer.login,
+    version: apiSelectors.version(state),
+    login: apiSelectors.login(state),
   };
 }
 

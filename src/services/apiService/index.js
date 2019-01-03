@@ -1,11 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import * as actions from './actions';
 import * as actionTypes from './actionTypes';
-import {post, get} from '../../utils/api';
+import * as helper from './helper';
 
 export function* fetchAPIVersion() {
   try {
-    const response = yield call(get, '/version');
+    const response = yield call(helper.get, '/version');
     yield put(actions.apiServiceVersionSuccess(response.data.version));
   } catch (e) {
     yield put(actions.apiServiceVersionFailure(e.message));
@@ -14,7 +14,7 @@ export function* fetchAPIVersion() {
 
 export function* login(action) {
   try {
-    yield call(post, '/login', action.login);
+    yield call(helper.post, '/login', action.login);
     yield put(actions.apiServiceLoginSuccess(action.login));
   } catch (e) {
     yield put(actions.apiServiceLoginFailure(e.message));
@@ -22,7 +22,7 @@ export function* login(action) {
 }
 
 export function* logOut() {
-  yield call(post, '/logout');
+  yield call(helper.post, '/logout');
 }
 
 export default function* watchAsync() {

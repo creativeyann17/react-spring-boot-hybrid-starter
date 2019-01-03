@@ -40,3 +40,10 @@ export const apiServiceLoginFailure = (error) => {
     error,
   }
 }
+
+export const apiServiceCsrf = (csrf) => {
+  return {
+    type: actionTypes.API_SERVICE_CSRF,
+    csrf,
+  }
+}
