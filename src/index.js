@@ -11,11 +11,12 @@ import { rootReducer, rootSaga} from './services';
 // others
 import * as serviceWorker from './utils/serviceWorker';
 import App from './app';
+import {DEBUG} from './utils/constants';
 import './index.css';
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
-if (process.env.NODE_ENV === 'development') {
+if (DEBUG) {
   middlewares.push(logger)
 }
 const store = createStore(

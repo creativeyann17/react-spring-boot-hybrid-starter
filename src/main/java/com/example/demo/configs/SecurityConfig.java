@@ -15,14 +15,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.example.demo.configs.restsecurity.RESTLogoutSuccessHandler;
 import com.example.demo.configs.restsecurity.RESTAuthenticationEntryPoint;
 import com.example.demo.configs.restsecurity.RESTAuthenticationFailureHandler;
 import com.example.demo.configs.restsecurity.RESTAuthenticationSuccessHandler;
+import com.example.demo.configs.restsecurity.RESTCsrfTokenResponseHeaderBindingFilter;
+import com.example.demo.configs.restsecurity.RESTLogoutSuccessHandler;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -51,18 +53,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();
+		final String loginUrl = Paths.get(appConfig.getApiBaseUrl(), "/login").toString();
+		final String logoutUrl = Paths.get(appConfig.getApiBaseUrl(), "/logout").toString();
+
+		// login / logout
 		http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
-		http.formLogin().loginProcessingUrl(Paths.get(appConfig.getApiBaseUrl(), "/login").toString()).successHandler(authenticationSuccessHandler)
-				.failureHandler(authenticationFailureHandler);
-		http.logout().logoutUrl(Paths.get(appConfig.getApiBaseUrl(), "/logout").toString()).logoutSuccessHandler(httpLogoutSuccessHandler);
+		http.formLogin().loginProcessingUrl(loginUrl).successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler);
+		http.logout().logoutUrl(logoutUrl).logoutSuccessHandler(httpLogoutSuccessHandler);
+
+		// DEV and no-DEV
 		if (envConfig.isDEV()) {
-			http.authorizeRequests().antMatchers("/**").permitAll();
+			http.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
 		} else {
+			// CORS
 			http.cors().disable();
+			// URLs
 			http.authorizeRequests().antMatchers("/", "/static/**").anonymous();
 			http.authorizeRequests().antMatchers(Paths.get(appConfig.getApiBaseUrl(), "/**").toString()).authenticated();
 			http.authorizeRequests().anyRequest().denyAll();
+			// CSRF
+			http.csrf().ignoringAntMatchers(loginUrl);
+			http.addFilterAfter(new RESTCsrfTokenResponseHeaderBindingFilter(), CsrfFilter.class);
 		}
 	}
 
