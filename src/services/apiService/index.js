@@ -3,9 +3,10 @@ import { delay } from 'redux-saga'
 import * as actions from './actions';
 import * as actionTypes from './actionTypes';
 import * as helper from './helper';
+import { WS_MESSAGE_TYPES } from '../../utils/constants';
 import { WS_SERVICE_ON_MESSAGE } from '../wsService/actionTypes';
 
-export function* fetchAPIVersion() {
+export function* watchVersionRequest() {
   try {
     const response = yield call(helper.get, '/version');
     yield put(actions.apiServiceVersionSuccess(response.data.version));
@@ -14,7 +15,7 @@ export function* fetchAPIVersion() {
   }
 }
 
-export function* login(action) {
+export function* watchLoginRequest(action) {
   try {
     yield call(helper.post, '/login', action.login);
     yield put(actions.apiServiceLoginSuccess(action.login));
@@ -23,7 +24,7 @@ export function* login(action) {
   }
 }
 
-export function* logout() {
+export function* watchLogoutRequest() {
   try {
     yield delay(60000);
     yield call(helper.post, '/logout');
@@ -33,9 +34,9 @@ export function* logout() {
   }
 }
 
-export function* watchWsMessage({ data }) {
+export function* watchWsOnMessage({ data }) {
   switch (data.type) {
-    case 'ONLINE_USERS_COUNT':
+    case WS_MESSAGE_TYPES.ONLINE_USERS_COUNT:
       yield put(actions.apiServiceOnlineUsersCount(data.count));
       break;
     default:
@@ -44,8 +45,8 @@ export function* watchWsMessage({ data }) {
 }
 
 export default function* watchAsync() {
-  yield takeLatest(actionTypes.API_SERVICE_LOGIN_REQUEST, login);
-  yield takeLatest(actionTypes.API_SERVICE_LOGIN_SUCCESS, fetchAPIVersion);
-  yield takeLatest(WS_SERVICE_ON_MESSAGE, watchWsMessage);
-  yield takeLatest([actionTypes.API_SERVICE_VERSION_SUCCESS, actionTypes.API_SERVICE_VERSION_FAILURE], logout);
+  yield takeLatest(actionTypes.API_SERVICE_LOGIN_REQUEST, watchLoginRequest);
+  yield takeLatest([actionTypes.API_SERVICE_VERSION_REQUEST, actionTypes.API_SERVICE_LOGIN_SUCCESS], watchVersionRequest);
+  yield takeLatest(WS_SERVICE_ON_MESSAGE, watchWsOnMessage);
+  yield takeLatest([actionTypes.API_SERVICE_LOGOUT_REQUEST, actionTypes.API_SERVICE_VERSION_SUCCESS, actionTypes.API_SERVICE_VERSION_FAILURE], watchLogoutRequest);
 }

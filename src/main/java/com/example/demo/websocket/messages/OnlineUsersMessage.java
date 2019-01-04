@@ -1,16 +1,19 @@
 package com.example.demo.websocket.messages;
 
+import com.example.demo.websocket.messages.utils.AbstractWsMessage;
+import com.example.demo.websocket.messages.utils.WsMessageType;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class OnlineUsersMessage extends AbstractWebSocketMessage {
+public class OnlineUsersMessage extends AbstractWsMessage {
 
 	private int count;
 
 	public OnlineUsersMessage(int count) {
-		super(SocketMessageType.ONLINE_USERS_COUNT);
+		super(WsMessageType.ONLINE_USERS_COUNT);
 		this.count = count;
 	}
 

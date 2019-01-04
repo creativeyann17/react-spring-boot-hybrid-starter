@@ -13,3 +13,7 @@ export const API_GUEST = {
 export const ROUTES = {
   INDEX: '/',
 }
+
+export const WS_MESSAGE_TYPES = {
+  ONLINE_USERS_COUNT: 'ONLINE_USERS_COUNT'
+}

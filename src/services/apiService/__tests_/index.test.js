@@ -1,11 +1,11 @@
 import * as axios from "axios";
 import { expectSaga } from 'redux-saga-test-plan';
-import { select,call } from 'redux-saga/effects';
+import { select, call } from 'redux-saga/effects';
 import * as helper from '../helper';
 import * as sagas from '../index';
 import * as selectors from '../selectors';
-import {API_CSRF_HEADER} from '../../../utils/constants';
-import reducer, {initialState} from '../reducer';
+import { API_CSRF_HEADER } from '../../../utils/constants';
+import reducer, { initialState } from '../reducer';
 
 
 // Mock out all top level functions, such as get, put, delete and post:
@@ -16,12 +16,12 @@ const defaultProvider = (config, response) => [
   [call(axios.request, config), Promise.resolve(response)],
 ];
 
-describe('login', () =>{
+describe('login', () => {
   it('success', () => {
-    const params = {username: 'foo', password: 'bar'};
+    const params = { username: 'foo', password: 'bar' };
     const config = helper.buildFetch('POST', '/login', null, params);
-    const response = {status : 200, headers: {[API_CSRF_HEADER]: 'csrf'}};
-    return expectSaga(sagas.login, {login:params})
+    const response = { status: 200, headers: { [API_CSRF_HEADER]: 'csrf' } };
+    return expectSaga(sagas.watchLoginRequest, { login: params })
       .withReducer(reducer)
       .provide(defaultProvider(config, response))
       .hasFinalState({
@@ -33,10 +33,10 @@ describe('login', () =>{
   });
 
   it('failure', () => {
-    const params = {username: 'foo', password: 'bar'};
+    const params = { username: 'foo', password: 'bar' };
     const config = helper.buildFetch('POST', '/login', null, params);
-    const response = {status : 403, statusText: 'forbidden'};
-    return expectSaga(sagas.login, {login:params})
+    const response = { status: 403, statusText: 'forbidden' };
+    return expectSaga(sagas.watchLoginRequest, { login: params })
       .withReducer(reducer)
       .provide(defaultProvider(config, response))
       .hasFinalState({
@@ -47,11 +47,11 @@ describe('login', () =>{
   });
 });
 
-describe('version', () =>{
+describe('version', () => {
   it('success', () => {
     const config = helper.buildFetch('GET', '/version');
-    const response = {status : 200, data: {version: 'foo'}};
-    return expectSaga(sagas.fetchAPIVersion)
+    const response = { status: 200, data: { version: 'foo' } };
+    return expectSaga(sagas.watchVersionRequest)
       .withReducer(reducer)
       .provide(defaultProvider(config, response))
       .hasFinalState({
@@ -63,8 +63,8 @@ describe('version', () =>{
 
   it('failure', () => {
     const config = helper.buildFetch('GET', '/version');
-    const response = {status : 403, statusText: 'forbidden'};
-    return expectSaga(sagas.fetchAPIVersion)
+    const response = { status: 403, statusText: 'forbidden' };
+    return expectSaga(sagas.watchVersionRequest)
       .withReducer(reducer)
       .provide(defaultProvider(config, response))
       .hasFinalState({

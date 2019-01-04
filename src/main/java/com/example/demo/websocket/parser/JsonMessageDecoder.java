@@ -1,19 +1,19 @@
-package com.example.demo.websocket;
+package com.example.demo.websocket.parser;
 
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
 
-import com.example.demo.websocket.messages.AbstractWebSocketMessage;
+import com.example.demo.websocket.messages.utils.AbstractWsMessage;
 import com.google.gson.Gson;
 
-public class APIWebSocketMessageDecoder implements Decoder.Text<AbstractWebSocketMessage> {
+public class JsonMessageDecoder implements Decoder.Text<AbstractWsMessage> {
 
 	private static Gson gson = new Gson();
 
 	@Override
-	public AbstractWebSocketMessage decode(String s) throws DecodeException {
-		return gson.fromJson(s, AbstractWebSocketMessage.class);
+	public AbstractWsMessage decode(String s) throws DecodeException {
+		return gson.fromJson(s, AbstractWsMessage.class);
 	}
 
 	@Override

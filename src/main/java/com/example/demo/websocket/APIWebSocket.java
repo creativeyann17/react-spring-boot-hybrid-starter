@@ -14,16 +14,18 @@ import javax.websocket.server.ServerEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.example.demo.websocket.messages.AbstractWebSocketMessage;
 import com.example.demo.websocket.messages.OnlineUsersMessage;
+import com.example.demo.websocket.messages.utils.AbstractWsMessage;
+import com.example.demo.websocket.parser.JsonMessageDecoder;
+import com.example.demo.websocket.parser.JsonMessageEncoder;
 
-@ServerEndpoint(value = "/api/ws", decoders = APIWebSocketMessageDecoder.class, encoders = APIWebSocketMessageEncoder.class)
+@ServerEndpoint(value = "/api/ws", decoders = JsonMessageDecoder.class, encoders = JsonMessageEncoder.class, configurator = APIWebSocketConfig.class)
 public class APIWebSocket {
 
 	private static final Logger log = LoggerFactory.getLogger(APIWebSocket.class);
+	private static Set<APIWebSocket> apiWebSockets = new CopyOnWriteArraySet<>();
 
 	private Session session;
-	private static Set<APIWebSocket> apiWebSockets = new CopyOnWriteArraySet<>();
 
 	@OnOpen
 	public void onOpen(Session session) throws IOException {
@@ -33,7 +35,7 @@ public class APIWebSocket {
 	}
 
 	@OnMessage
-	public void onMessage(Session session, AbstractWebSocketMessage message) throws IOException {
+	public void onMessage(Session session, AbstractWsMessage message) throws IOException {
 
 	}
 
@@ -48,7 +50,7 @@ public class APIWebSocket {
 		log.error(throwable.getMessage());
 	}
 
-	private static void broadcast(AbstractWebSocketMessage message) {
+	private static void broadcast(AbstractWsMessage message) {
 		for (APIWebSocket socket : apiWebSockets) {
 			synchronized (socket) {
 				try {
