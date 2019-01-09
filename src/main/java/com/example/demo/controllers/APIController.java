@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("${app.api-base-url}")
 public class APIController {
 
-	public static final String VERSION = "{ \"version\": \"0.0.1\" }";
-
 	@GetMapping("/version")
-	public String getVersion() {
-		return VERSION;
+	public Version getVersion() {
+		return new Version();
+	}
+
+	public static class Version {
+		public String version = "0.0.1";
 	}
 
 }
