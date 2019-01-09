@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("dev")
-public class EnvConfigTests {
+public class EnvConfigTest {
 
 	@Autowired
 	protected EnvConfig envConfig;

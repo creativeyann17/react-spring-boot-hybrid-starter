@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import com.example.demo.CsrfAbstractIntegrationTest;
 
-public class APIControllerTests extends CsrfAbstractIntegrationTest {
+public class APIControllerTest extends CsrfAbstractIntegrationTest {
 
 	@Test
 	public void getVersionWithUser() throws Exception {
