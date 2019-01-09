@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+@Component
 public class RESTCsrfTokenResponseHeaderBindingFilter extends OncePerRequestFilter {
 
 	protected static final String REQUEST_ATTRIBUTE_NAME = "_csrf";

@@ -51,6 +51,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private RESTAuthenticationSuccessHandler authenticationSuccessHandler;
 
+	@Autowired
+	private RESTCsrfTokenResponseHeaderBindingFilter csrfTokenResponseHeaderBindingFilter;
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		final String loginUrl = Paths.get(appConfig.getApiBaseUrl(), "/login").toString();
@@ -73,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			http.authorizeRequests().anyRequest().denyAll();
 			// CSRF
 			http.csrf().ignoringAntMatchers(loginUrl);
-			http.addFilterAfter(new RESTCsrfTokenResponseHeaderBindingFilter(), CsrfFilter.class);
+			http.addFilterAfter(csrfTokenResponseHeaderBindingFilter, CsrfFilter.class);
 		}
 	}
 
