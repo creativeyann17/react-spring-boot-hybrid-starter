@@ -23,7 +23,9 @@ This custom starter contains the following:
   * lombok/security/cors/logger
   * REST login/logout with CSRF support
   * WebSocket with JSON encoder/decoder
+  * GSON by default + auto configured
+  * BeanConfig to manage non-spring classes
   * swagger-ui
-  * custom configuration
+  * YML custom configuration
   * 'dev' ready profil with H2
   * some tests
