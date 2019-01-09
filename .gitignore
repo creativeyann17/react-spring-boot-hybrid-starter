@@ -41,6 +41,7 @@ node/
 .env.production.local
 
 build.sh
+logs/
 
 npm-debug.log*
 yarn-debug.log*

@@ -10,6 +10,12 @@ spring:
 logging:
   level:
     root: ERROR
+  file:
+    max-size: 2MB
+    max-history: 1
+  path: ./logs
+  pattern:
+    dateformat: yyyy-MM-dd'T'HH:mm:ss.SSSZ
 app:
   api-base-url: /api
   public-urls:
