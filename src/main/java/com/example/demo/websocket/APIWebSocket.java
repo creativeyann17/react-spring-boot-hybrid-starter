@@ -1,8 +1,6 @@
 package com.example.demo.websocket;
 
 import java.io.IOException;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -14,7 +12,7 @@ import javax.websocket.server.ServerEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.example.demo.websocket.messages.OnlineUsersMessage;
+import com.example.demo.configs.BeanConfig;
 import com.example.demo.websocket.messages.utils.AbstractWsMessage;
 import com.example.demo.websocket.parser.JsonMessageDecoder;
 import com.example.demo.websocket.parser.JsonMessageEncoder;
@@ -23,26 +21,28 @@ import com.example.demo.websocket.parser.JsonMessageEncoder;
 public class APIWebSocket {
 
 	private static final Logger log = LoggerFactory.getLogger(APIWebSocket.class);
-	private static Set<APIWebSocket> apiWebSockets = new CopyOnWriteArraySet<>();
 
+	private APIWebSocketManager manager;
 	private Session session;
+
+	public APIWebSocket() {
+		this.manager = BeanConfig.getBean(APIWebSocketManager.class);
+	}
 
 	@OnOpen
 	public void onOpen(Session session) throws IOException {
 		this.session = session;
-		apiWebSockets.add(this);
-		broadcast(new OnlineUsersMessage(apiWebSockets.size()));
+		manager.add(this);
 	}
 
 	@OnMessage
 	public void onMessage(Session session, AbstractWsMessage message) throws IOException {
-
+		log.debug("Session: {} message: {}", session.getUserProperties().get("JSESSIONID"), message.toString());
 	}
 
 	@OnClose
 	public void onClose(Session session) throws IOException {
-		apiWebSockets.remove(this);
-		broadcast(new OnlineUsersMessage(apiWebSockets.size()));
+		manager.remove(this);
 	}
 
 	@OnError
@@ -50,16 +50,8 @@ public class APIWebSocket {
 		log.error(throwable.getMessage());
 	}
 
-	private static void broadcast(AbstractWsMessage message) {
-		for (APIWebSocket socket : apiWebSockets) {
-			synchronized (socket) {
-				try {
-					socket.session.getBasicRemote().sendObject(message);
-				} catch (Exception e) {
-					log.error(e.getMessage());
-				}
-			}
-		}
+	public Session getSession() {
+		return this.session;
 	}
 
 }

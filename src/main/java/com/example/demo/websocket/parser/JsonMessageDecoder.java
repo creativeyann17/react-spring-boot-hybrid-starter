@@ -4,16 +4,21 @@ import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
 
+import com.example.demo.configs.BeanConfig;
+import com.example.demo.utils.JsonParser;
 import com.example.demo.websocket.messages.utils.AbstractWsMessage;
-import com.google.gson.Gson;
 
 public class JsonMessageDecoder implements Decoder.Text<AbstractWsMessage> {
 
-	private static Gson gson = new Gson();
+	private JsonParser jsonParser;
+
+	public JsonMessageDecoder() {
+		this.jsonParser = BeanConfig.getBean(JsonParser.class);
+	}
 
 	@Override
 	public AbstractWsMessage decode(String s) throws DecodeException {
-		return gson.fromJson(s, AbstractWsMessage.class);
+		return jsonParser.fromJson(s, AbstractWsMessage.class);
 	}
 
 	@Override
