@@ -13,7 +13,7 @@ public class APIWebSocketConfig extends ServerEndpointRegistration.Configurator 
 	@Override
 	public void modifyHandshake(ServerEndpointConfig config, HandshakeRequest request, HandshakeResponse response) {
 		MultiValueMap<String, String> cookies = getCookiesFromRequest(request);
-		config.getUserProperties().put("JSESSIONID", cookies.get("JSESSIONID").get(0));
+		config.getUserProperties().put("JSESSIONID", cookies.getFirst("JSESSIONID"));
 	}
 
 	private MultiValueMap<String, String> getCookiesFromRequest(HandshakeRequest request) {
