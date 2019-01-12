@@ -3,10 +3,10 @@ package com.example.demo.websocket.messages;
 import com.example.demo.websocket.messages.utils.AbstractWsMessage;
 import com.example.demo.websocket.messages.utils.WsMessageType;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-@Data
+@Getter
 @EqualsAndHashCode(callSuper = true)
 public class OnlineUsersMessage extends AbstractWsMessage {
 

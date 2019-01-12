@@ -3,9 +3,9 @@ package com.example.demo.websocket.messages.utils;
 import com.example.demo.configs.BeanConfig;
 import com.example.demo.utils.JsonParser;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public abstract class AbstractWsMessage {
 
 	protected WsMessageType type;
