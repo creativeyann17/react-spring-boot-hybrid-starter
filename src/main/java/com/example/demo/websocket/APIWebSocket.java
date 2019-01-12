@@ -1,7 +1,5 @@
 package com.example.demo.websocket;
 
-import java.io.IOException;
-
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -11,6 +9,7 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.configs.BeanConfig;
 import com.example.demo.websocket.messages.utils.AbstractWsMessage;
@@ -22,6 +21,7 @@ public class APIWebSocket {
 
 	private static final Logger log = LoggerFactory.getLogger(APIWebSocket.class);
 
+	@Autowired
 	private APIWebSocketManager manager;
 	private Session session;
 
@@ -30,18 +30,18 @@ public class APIWebSocket {
 	}
 
 	@OnOpen
-	public void onOpen(Session session) throws IOException {
+	public void onOpen(Session session) {
 		this.session = session;
 		manager.add(this);
 	}
 
 	@OnMessage
-	public void onMessage(Session session, AbstractWsMessage message) throws IOException {
-		log.debug("Session: {} message: {}", session.getUserProperties().get("JSESSIONID"), message.toString());
+	public void onMessage(Session session, AbstractWsMessage message) {
+		log.debug("Session: {} message: {}", session.getUserProperties().get("JSESSIONID"), message);
 	}
 
 	@OnClose
-	public void onClose(Session session) throws IOException {
+	public void onClose(Session session) {
 		manager.remove(this);
 	}
 
@@ -52,6 +52,10 @@ public class APIWebSocket {
 
 	public Session getSession() {
 		return this.session;
+	}
+
+	public APIWebSocketManager getManager() {
+		return this.manager;
 	}
 
 }

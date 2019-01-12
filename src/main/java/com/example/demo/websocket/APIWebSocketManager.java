@@ -34,7 +34,7 @@ public class APIWebSocketManager {
 				try {
 					socket.getSession().getBasicRemote().sendObject(message);
 				} catch (Exception e) {
-					System.out.println(e);
+					log.error("Fail to broadcast message type {} to {} reason {}", message.getType(), socket.getSession().getId(), e.getMessage());
 				}
 			}
 		}

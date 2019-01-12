@@ -44,7 +44,8 @@ public class AppConfig {
 		/**
 		 * Guest default password
 		 */
-		private String password = "";
+		@NotBlank
+		private String password;
 	}
 
 }
