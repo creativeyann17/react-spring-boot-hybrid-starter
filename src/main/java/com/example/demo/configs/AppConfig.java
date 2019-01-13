@@ -24,8 +24,7 @@ public class AppConfig {
 	/**
 	 * Cross-Origin URL allowed in DEV mode
 	 */
-	@NotBlank
-	private String corsUrl;
+	private String corsUrl = "";
 
 	/**
 	 * Ignored by Spring Security

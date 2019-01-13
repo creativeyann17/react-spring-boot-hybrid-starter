@@ -1,9 +1,8 @@
 package com.example.demo.configs.securityconfig;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.nio.file.Paths;
 
 import org.junit.Test;
 import org.springframework.http.HttpHeaders;
@@ -16,30 +15,29 @@ import com.example.demo.configs.EnvConfig;
 public class ProfilDev extends ProfilAll {
 
 	@Test
-	public void cors() {
-		this.webClient.get().uri(Paths.get(appConfig.getApiBaseUrl(), "/version").toString()).header(HttpHeaders.ORIGIN, appConfig.getCorsUrl()).exchange()
-				.expectStatus().isOk();
+	public void cors() throws Exception {
+		this.mvc.perform(get("/api/version").header(HttpHeaders.ORIGIN, appConfig.getCorsUrl())).andExpect(status().isOk());
 	}
 
 	@Test
-	public void swaggerUI() {
-		this.webClient.get().uri("/swagger-ui.html").exchange().expectStatus().isOk();
+	public void swaggerUI() throws Exception {
+		this.mvc.perform(get("/swagger-ui.html")).andExpect(status().isOk());
 	}
 
 	@Test
-	public void h2() {
-		this.webClient.get().uri("/h2-console.html").exchange().expectStatus().isNotFound(); // maybe because it's a test, should be isOk()
+	public void h2() throws Exception {
+		this.mvc.perform(get("/h2-console")).andExpect(status().isNotFound());
 	}
 
 	@Test
 	public void login() throws Exception {
-		mvc.perform(post("/api/login").param("username", "GUEST").param("password", "")).andExpect(status().isOk());
+		this.mvc.perform(post("/api/login").param("username", "GUEST").param("password", "")).andExpect(status().isOk());
 	}
 
 	@Test
 	@WithMockUser(username = "GUEST")
 	public void logout() throws Exception {
-		mvc.perform(post("/api/logout")).andExpect(status().isOk());
+		this.mvc.perform(post("/api/logout")).andExpect(status().isOk());
 	}
 
 }
