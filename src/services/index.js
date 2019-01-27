@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import { all } from 'redux-saga/effects'
+import { all } from 'redux-saga/effects';
 // all reducers
 import intlServiceReducer from './intlService/reducer';
 import apiServiceReducer from './apiService/reducer';
 import wsServiceReducer from './wsService/reducer';
 // all sagas
-import apiServiceSaga from './apiService'
-import wsServiceSaga from './wsService'
+import apiServiceSaga from './apiService';
+import wsServiceSaga from './wsService';
 
 export const rootReducer = combineReducers({
   intlServiceReducer,
@@ -15,8 +15,5 @@ export const rootReducer = combineReducers({
 });
 
 export function* rootSaga() {
-  yield all([
-    apiServiceSaga(),
-    wsServiceSaga(),
-  ])
+  yield all([apiServiceSaga(), wsServiceSaga()]);
 }

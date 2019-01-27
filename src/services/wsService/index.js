@@ -1,26 +1,26 @@
-import { take, fork, put, select, takeLatest } from 'redux-saga/effects'
-import * as actions from './actions';
+import { take, fork, put, select, takeLatest } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
+import get from 'lodash/get';
+import * as actions from './actions';
 import * as actionTypes from './actionTypes';
 import { API_SERVICE_LOGIN_SUCCESS } from '../apiService/actionTypes';
 import * as selectors from './selectors';
 import { DEBUG, API_WS_URL } from '../../utils/constants';
-import get from 'lodash/get';
 
-const buildUrl = (path) => {
-  var protocol = (window.location.protocol === 'https:') ? 'wss:' : 'ws:';
-  var host = DEBUG ? 'localhost:8080' : window.location.host; // until package proxy fixed for ws
+const buildUrl = path => {
+  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const host = DEBUG ? 'localhost:8080' : window.location.host; // until package proxy fixed for ws
   return new URL(path, protocol + host);
-}
+};
 
-const isOpen = (socket) => {
+const isOpen = socket => {
   return get(socket, 'readyState', socket.CLOSED) !== socket.CLOSED;
-}
+};
 
 function* watchOnOpen(socket) {
   const chan = eventChannel(emitter => {
-    socket.onopen = (event) => emitter(event);
-    return () => { };
+    socket.onopen = event => emitter(event);
+    return () => {};
   });
   while (isOpen(socket)) {
     const event = yield take(chan);
@@ -30,8 +30,8 @@ function* watchOnOpen(socket) {
 
 function* watchOnMessage(socket) {
   const chan = eventChannel(emitter => {
-    socket.onmessage = (event) => emitter(event);
-    return () => { };
+    socket.onmessage = event => emitter(event);
+    return () => {};
   });
   while (isOpen(socket)) {
     const event = yield take(chan);
@@ -42,8 +42,8 @@ function* watchOnMessage(socket) {
 
 function* watchOnError(socket) {
   const chan = eventChannel(emitter => {
-    socket.onerror = (event) => emitter(event);
-    return () => { };
+    socket.onerror = event => emitter(event);
+    return () => {};
   });
   while (isOpen(socket)) {
     const event = yield take(chan);
@@ -53,8 +53,8 @@ function* watchOnError(socket) {
 
 function* watchOnClose(socket) {
   const chan = eventChannel(emitter => {
-    socket.onclose = (event) => emitter(event);
-    return () => { };
+    socket.onclose = event => emitter(event);
+    return () => {};
   });
   while (isOpen(socket)) {
     const event = yield take(chan);

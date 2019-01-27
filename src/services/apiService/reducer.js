@@ -7,7 +7,7 @@ export const initialState = {
   onlineUserCount: undefined,
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case actionTypes.API_SERVICE_VERSION_REQUEST:
       return {

@@ -1,4 +1,4 @@
-import * as axios from "axios";
+import * as axios from 'axios';
 import { expectSaga } from 'redux-saga-test-plan';
 import { select, call } from 'redux-saga/effects';
 import * as helper from '../helper';
@@ -7,9 +7,8 @@ import * as selectors from '../selectors';
 import { API_CSRF_HEADER } from '../../../utils/constants';
 import reducer, { initialState } from '../reducer';
 
-
 // Mock out all top level functions, such as get, put, delete and post:
-jest.mock("axios");
+jest.mock('axios');
 
 const defaultProvider = (config, response) => [
   [select(selectors.csrf), config.csrf],
@@ -27,7 +26,7 @@ describe('login', () => {
       .hasFinalState({
         ...initialState,
         login: params.username,
-        csrf: response.headers[API_CSRF_HEADER]
+        csrf: response.headers[API_CSRF_HEADER],
       })
       .run();
   });

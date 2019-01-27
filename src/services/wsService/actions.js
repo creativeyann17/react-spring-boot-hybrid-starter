@@ -2,34 +2,34 @@ import * as actionTypes from './actionTypes';
 
 export const wsServiceOpen = () => {
   return {
-    type: actionTypes.WS_SERVICE_OPEN
-  }
-}
+    type: actionTypes.WS_SERVICE_OPEN,
+  };
+};
 
-export const wsServiceOnOpen = (ws) => {
+export const wsServiceOnOpen = ws => {
   return {
     type: actionTypes.WS_SERVICE_ON_OPEN,
-    ws
-  }
-}
+    ws,
+  };
+};
 
-export const wsServiceOnMessage = (data) => {
+export const wsServiceOnMessage = data => {
   return {
     type: actionTypes.WS_SERVICE_ON_MESSAGE,
-    data
-  }
-}
+    data,
+  };
+};
 
-export const wsServiceOnError = (error) => {
+export const wsServiceOnError = error => {
   return {
     type: actionTypes.WS_SERVICE_ON_ERROR,
-    error
-  }
-}
+    error,
+  };
+};
 
-export const wsServiceOnClose = (ws) => {
+export const wsServiceOnClose = ws => {
   return {
     type: actionTypes.WS_SERVICE_ON_CLOSE,
-    ws
-  }
-}
+    ws,
+  };
+};

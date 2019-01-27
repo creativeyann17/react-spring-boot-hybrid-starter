@@ -1,5 +1,5 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import * as actions from './actions';
 import * as actionTypes from './actionTypes';
 import * as helper from './helper';
@@ -46,7 +46,17 @@ export function* watchWsOnMessage({ data }) {
 
 export default function* watchAsync() {
   yield takeLatest(actionTypes.API_SERVICE_LOGIN_REQUEST, watchLoginRequest);
-  yield takeLatest([actionTypes.API_SERVICE_VERSION_REQUEST, actionTypes.API_SERVICE_LOGIN_SUCCESS], watchVersionRequest);
+  yield takeLatest(
+    [actionTypes.API_SERVICE_VERSION_REQUEST, actionTypes.API_SERVICE_LOGIN_SUCCESS],
+    watchVersionRequest
+  );
   yield takeLatest(WS_SERVICE_ON_MESSAGE, watchWsOnMessage);
-  yield takeLatest([actionTypes.API_SERVICE_LOGOUT_REQUEST, actionTypes.API_SERVICE_VERSION_SUCCESS, actionTypes.API_SERVICE_VERSION_FAILURE], watchLogoutRequest);
+  yield takeLatest(
+    [
+      actionTypes.API_SERVICE_LOGOUT_REQUEST,
+      actionTypes.API_SERVICE_VERSION_SUCCESS,
+      actionTypes.API_SERVICE_VERSION_FAILURE,
+    ],
+    watchLogoutRequest
+  );
 }

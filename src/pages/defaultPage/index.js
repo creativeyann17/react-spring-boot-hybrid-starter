@@ -7,21 +7,20 @@ import * as apiSelectors from '../../services/apiService/selectors';
 
 const messages = defineMessages({
   welcome: {
-    id: 'page.index.welcome'
+    id: 'page.index.welcome',
   },
   version: {
-    id: 'page.index.version'
+    id: 'page.index.version',
   },
   login: {
-    id: 'page.index.login'
+    id: 'page.index.login',
   },
   online: {
-    id: 'page.index.online'
-  }
-})
+    id: 'page.index.online',
+  },
+});
 
-const DefaultPage = (props) => {
-
+const DefaultPage = props => {
   const { intl, version, login, count } = props;
 
   return (
@@ -32,27 +31,27 @@ const DefaultPage = (props) => {
       <p>{intl.formatMessage(messages.online, { count })}</p>
     </DefaultLayout>
   );
-}
+};
 
 DefaultPage.propTypes = {
   intl: intlShape.isRequired,
   version: PropTypes.string,
   login: PropTypes.string,
   count: PropTypes.string,
-}
+};
 
 DefaultPage.defaultProps = {
   version: 'N/A',
   login: 'N/A',
   count: 'N/A',
-}
+};
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     version: apiSelectors.version(state),
     login: apiSelectors.login(state),
     count: apiSelectors.onlineUserCount(state),
   };
-}
+};
 
 export default injectIntl(connect(mapStateToProps)(DefaultPage));

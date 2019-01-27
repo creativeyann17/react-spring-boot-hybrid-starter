@@ -19,21 +19,20 @@ import * as intlSelectors from '../services/intlService/selectors';
 addLocaleData([...locale_en, ...locale_fr]);
 
 export const messages = {
-  'en': i18n_en,
-  'fr': i18n_fr
+  en: i18n_en,
+  fr: i18n_fr,
 };
 
 class App extends Component {
-
   componentDidMount = () => {
     this.props.logAsGuest();
-  }
+  };
 
   render() {
     const { lang } = this.props;
     return (
       <React.Fragment>
-        <IntlProvider locale={lang} messages={messages[lang]} >
+        <IntlProvider locale={lang} messages={messages[lang]}>
           <BrowserRouter>
             <Route exact path={ROUTES.INDEX} component={DefaultPage} />
           </BrowserRouter>
@@ -45,16 +44,19 @@ class App extends Component {
 
 App.propTypes = {
   lang: PropTypes.string.isRequired,
-}
+};
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     lang: intlSelectors.lang(state),
   };
-}
+};
 
 const mapDispatchToProps = dispatch => ({
   logAsGuest: () => dispatch(apiServiceLoginRequest(API_GUEST)),
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

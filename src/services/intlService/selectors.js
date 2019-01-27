@@ -1,1 +1,1 @@
-export const lang = (state) => state.intlServiceReducer.lang;
+export const lang = state => state.intlServiceReducer.lang;

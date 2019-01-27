@@ -4,7 +4,7 @@ export const initialState = {
   ws: undefined,
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case actionTypes.WS_SERVICE_ON_OPEN:
       return {
