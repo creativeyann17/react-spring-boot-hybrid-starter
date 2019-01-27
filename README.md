@@ -21,7 +21,7 @@ This custom starter contains the following:
   * Javascript WebSocket managed by saga
   * some tests
 * spring Boot 2
-  * lombok/security/cors/logger/JUnit4
+  * lombok/security/cors/logger/JUnit4/Java11
   * REST login/logout with CSRF support
   * WebSocket with JSON encoder/decoder
   * GSON by default + auto configured
