@@ -20,7 +20,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "pre-push": "npm run test --watchAll"
+      "pre-push": "npm run test:watch"
     }
   },
   "scripts": {
@@ -28,6 +28,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --watchAll",
     "eject": "react-scripts eject",
     "lint-staged": "lint-staged"
   },
