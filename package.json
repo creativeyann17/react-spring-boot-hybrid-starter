@@ -19,7 +19,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run format",
+      "pre-commit": "npm run lint && git add .",
       "pre-push": "npm run test"
     }
   },
@@ -29,7 +29,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint-staged": "lint-staged"
   },
   "eslintConfig": {
     "extends": "react-app"
