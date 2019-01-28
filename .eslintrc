@@ -5,7 +5,16 @@
     "prettier/react",
     "plugin:lodash/recommended"
   ],
+  "env": {
+    "jest": true,
+    "browser": true,
+    "node": true
+  },
   "rules": {
+    "no-console": "off",
+    "import/prefer-default-export": "off",
+    "no-param-reassign": "off",
+    "lodash/prefer-noop": "off",
     "react/jsx-filename-extension": [
       1,
       {
@@ -27,6 +36,7 @@
   },
   "plugins": [
     "prettier",
-    "lodash"
+    "lodash",
+    "jest"
   ]
 }

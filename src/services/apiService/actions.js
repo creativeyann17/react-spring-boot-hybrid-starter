@@ -26,7 +26,7 @@ export const apiServiceLogoutRequest = () => {
   };
 };
 
-export const apiServiceLogoutSuccess = login => {
+export const apiServiceLogoutSuccess = () => {
   return {
     type: actionTypes.API_SERVICE_LOGOUT_SUCCESS,
   };
