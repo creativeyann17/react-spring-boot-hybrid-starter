@@ -19,13 +19,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && git add .",
+      "pre-commit": "npm run lint",
       "pre-push": "npm run test"
     }
   },
   "scripts": {
     "lint": "eslint \"src/**/*.js\" --fix --ignore-path .gitignore --max-warnings=0 .",
-    "format": "prettier --write \"src/**/*.js\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
