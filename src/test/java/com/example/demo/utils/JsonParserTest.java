@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.example.demo.configs.BeanConfig;
 import com.example.demo.websocket.messages.OnlineUsersMessage;
+import com.google.gson.Gson;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { JsonParser.class })
+@SpringBootTest(classes = { BeanConfig.class, Gson.class })
 public class JsonParserTest {
 
 	private static final OnlineUsersMessage msg = new OnlineUsersMessage(1);

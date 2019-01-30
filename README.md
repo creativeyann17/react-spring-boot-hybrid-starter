@@ -29,4 +29,5 @@ This custom starter contains the following:
   * swagger-ui
   * YML custom configuration
   * 'dev' ready profil with H2
+  * PITest for mutation testing (not really used)
   * some tests

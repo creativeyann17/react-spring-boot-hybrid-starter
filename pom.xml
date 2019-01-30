@@ -95,6 +95,19 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<configuration>
+					<threads>8</threads>
+					<targetClasses>
+						<param>com.example.demo.*</param>
+					</targetClasses>
+					<targetTests>
+						<param>com.example.demo.*</param>
+					</targetTests>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
