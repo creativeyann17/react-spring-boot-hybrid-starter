@@ -19,9 +19,15 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint",
+      "pre-commit": "lint-staged",
       "pre-push": "npm run test:watch"
     }
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "npm run lint",
+      "git add"
+    ]
   },
   "scripts": {
     "lint": "eslint \"src/**/*.js\" --fix --ignore-path .gitignore --max-warnings=0 .",
@@ -52,7 +58,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
     "husky": "^1.3.1",
-    "prettier": "^1.16.1",
+    "lint-staged": "^8.1.1",
     "redux-saga-test-plan": "^3.7.0"
   }
 }

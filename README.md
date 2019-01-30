@@ -14,7 +14,7 @@ Current FrontEnd behavior is:
 This custom starter contains the following:
 * react 16
   * router/intl/redux/saga/logger/axios
-  * eslint/prettier plugins: airbnb/lodash
+  * eslint/husky/lint-stage plugins: airbnb/lodash
   * service worker (disabled by default)
   * one default layout and page
   * REST login/logout with CSRF support
