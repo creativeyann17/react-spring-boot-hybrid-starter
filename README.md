@@ -19,6 +19,7 @@ This custom starter contains the following:
   * one default layout and page
   * REST login/logout with CSRF support
   * Javascript WebSocket managed by saga
+  * Stryker for mutation testing (not really used)
   * some tests
 * spring Boot 2
   * lombok/security/cors/logger/JUnit4/Java11

@@ -32,6 +32,10 @@ build/
 coverage/
 node/
 
+## stryker ##
+.stryker-tmp
+reports/
+
 ### misc ###
 .sonarlint
 .DS_Store
