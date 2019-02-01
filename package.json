@@ -20,7 +20,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run test:watch"
+      "pre-push": "mvn clean test"
     }
   },
   "lint-staged": {
