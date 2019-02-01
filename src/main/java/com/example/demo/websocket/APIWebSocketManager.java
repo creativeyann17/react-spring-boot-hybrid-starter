@@ -5,10 +5,12 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.websocket.messages.OnlineUsersMessage;
 import com.example.demo.websocket.messages.utils.AbstractWsMessage;
 
+@Service
 public class APIWebSocketManager {
 
 	private final Logger log = LoggerFactory.getLogger(APIWebSocketManager.class);

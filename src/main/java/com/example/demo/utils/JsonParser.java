@@ -1,15 +1,15 @@
 package com.example.demo.utils;
 
-import com.example.demo.configs.BeanConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.google.gson.Gson;
 
+@Service
 public class JsonParser {
 
+	@Autowired
 	private Gson gson;
-
-	public JsonParser() {
-		this.gson = BeanConfig.getBean(Gson.class);
-	}
 
 	public String toJson(Object o) {
 		return this.gson.toJson(o);
